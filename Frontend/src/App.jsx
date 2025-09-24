@@ -3,8 +3,25 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import './index.css';
+import Services from "./pages/website/services";
+import HowItWorks from "./pages/website/how.it.work";
+import Resources from "./pages/website/resources";
+import Contact from "./pages/website/contact";
+import Home1 from "./pages/website/home1";
+import NewRequest from "./pages/public/newrequest";
+import Properties from "./pages/public/Properties";
+import Reports from "./pages/public/Reports";
+import Payments from "./pages/public/Payments";
+import Notifications from "./pages/public/Notifications";
+import Profile from "./pages/public/Profile";
+import Logout from "./pages/Logout";
+import Status from "./pages/public/Status";
+import MyClients from "./pages/dealer/MyClients";
+import Earnings from "./pages/dealer/Earnings";
+import ClientProperties from "./pages/dealer/ClientProperties";
 
 // Lazy load pages
+
 const Home = lazy(() => import("./pages/Home"));
 const CheckProperty = lazy(() => import("./pages/CheckProperty"));
 const Checklist = lazy(() => import("./pages/Checklist"));
@@ -16,7 +33,6 @@ const UploadDocs = lazy(() => import("./pages/UploadDocs"));
 const Learn = lazy(() => import("./pages/Learn"));
 const Community = lazy(() => import("./pages/Community"));
 const Alerts = lazy(() => import("./pages/Alerts"));
-const Contact = lazy(() => import("./pages/Contact"));
 const Login = lazy(() => import("./pages/login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const About = lazy(() => import("./pages/About"));
@@ -64,11 +80,12 @@ function App() {
               <Route path="/learn" element={<Learn />} />
               <Route path="/community" element={<Community />} />
               <Route path="/alerts" element={<Alerts />} />
-              <Route path="/contact" element={<Contact />} />
+              
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/about" element={<About />} />
               <Route path="/map" element={<ColonyStatusPage />} />
+              <Route path="/logout" element={<Logout />} />
 
               {/* Admin */}
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -82,6 +99,13 @@ function App() {
 
               {/* Public */}
               <Route path="/public/dashboard" element={<PublicDashboard />} />
+              <Route path="/public/new-request" element={<NewRequest />} />
+              <Route path="/public/properties" element={<Properties />} />
+              <Route path="/public/reports" element={<Reports />} />
+              <Route path="/public/payments" element={<Payments />} />
+              <Route path="/public/notifications" element={<Notifications />} />
+              <Route path="/public/profile" element={<Profile />} />
+              <Route path="/public/status" element={<Status />} />
 
               {/* Dealer */}
               <Route path="/dealer/dashboard" element={<DealerDashboard />} />
@@ -91,6 +115,15 @@ function App() {
               <Route path="/dealer/check-status" element={<CheckColonyStatus />} />
               <Route path="/dealer/map" element={<AreaApprovalMap />} />
               <Route path="/dealer/fraud-reports" element={<FraudReportStatus />} />
+              <Route path="/dealer/clients" element={<MyClients />} />
+              <Route path="/dealer/earnings" element={<Earnings />} />
+              <Route path="/dealer/properties" element={< ClientProperties/>} />
+              {/* Website pages */}
+              <Route path="/services" element={<Services />} />
+              <Route path="/how-it-work" element={<HowItWorks />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/home" element={<Home1 />} />
             </Routes>
           </Suspense>
         </main>

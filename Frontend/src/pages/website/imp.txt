@@ -1,0 +1,4 @@
+{/* <Link to="/check-property" className="hover:text-blue-500">Property Check</Link>
+          <Link to="/dealer-check" className="hover:text-blue-500">Dealer Check</Link>
+          <Link to="/upload-docs" className="hover:text-blue-500">Legal Docs</Link>
+          <Link to="/learn" className="hover:text-blue-500">Learn</Link> */}
