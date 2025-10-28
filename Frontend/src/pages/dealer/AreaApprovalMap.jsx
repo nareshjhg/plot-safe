@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
-import DealerSidebar from '../../components/DealerSidebar';
+import Sidebar from '../../components/sidebar';
 import 'leaflet/dist/leaflet.css';
 
 // Sample colony data with lat,lng and status
@@ -14,7 +14,7 @@ const colonies = [
 const AreaApprovalMap = () => {
   return (
     <div className="flex">
-      <DealerSidebar />
+      <Sidebar />
       <div className="flex-1 p-6 bg-gray-50 min-h-screen">
         <h1 className="text-2xl font-bold mb-4 text-green-700">Area Approval Map</h1>
         <p className="text-gray-600 mb-6">View map of approved and illegal colonies.</p>

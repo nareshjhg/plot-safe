@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DealerSidebar from '../../components/DealerSidebar';
+import Sidebar from '../../components/sidebar';
 
 const colonyData = [
   { name: 'Green Valley', status: 'Approved by DTCP', area: 'Sector 85' },
@@ -20,7 +20,7 @@ const CheckColonyStatus = () => {
 
   return (
     <div className="flex">
-      <DealerSidebar />
+      <Sidebar />
       <div className="flex-1 p-6 bg-gray-50 min-h-screen">
         <h1 className="text-2xl font-bold mb-4 text-green-700">Check Colony Status</h1>
         <p className="text-gray-600 mb-6">Search colony name to check its legal status (CLU, RERA, DTCP etc.).</p>

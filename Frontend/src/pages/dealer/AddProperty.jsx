@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DealerSidebar from '../../components/DealerSidebar';
+import Sidebar from '../../components/sidebar';
 
 const AddProperty = () => {
   const [form, setForm] = useState({
@@ -37,7 +37,7 @@ const AddProperty = () => {
 
   return (
     <div className="flex">
-      <DealerSidebar />
+      <Sidebar />
       <div className="flex-1 p-6 bg-gray-50 min-h-screen">
         <h1 className="text-3xl font-semibold text-green-700 mb-6">Add Property Listing</h1>
 

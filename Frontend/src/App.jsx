@@ -12,13 +12,15 @@ import NewRequest from "./pages/public/newrequest";
 import Properties from "./pages/public/Properties";
 import Reports from "./pages/public/Reports";
 import Payments from "./pages/public/Payments";
-import Notifications from "./pages/public/Notifications";
-import Profile from "./pages/public/Profile";
+import Notifications from "./pages/Notifications";
+import Profile from "./pages/Profile";
 import Logout from "./pages/Logout";
 import Status from "./pages/public/Status";
 import MyClients from "./pages/dealer/MyClients";
 import Earnings from "./pages/dealer/Earnings";
 import ClientProperties from "./pages/dealer/ClientProperties";
+import Sidebar from "./components/sidebar";
+import ViewDocuments from "./pages/public/ViewDocuments";
 
 // Lazy load pages
 
@@ -62,7 +64,7 @@ const FraudReportStatus = lazy(() => import("./pages/dealer/FraudReportStatus"))
 
 function App() {
   return (
-    <Router>
+    <Router basename="/plot-safe">
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
@@ -103,9 +105,10 @@ function App() {
               <Route path="/public/properties" element={<Properties />} />
               <Route path="/public/reports" element={<Reports />} />
               <Route path="/public/payments" element={<Payments />} />
-              <Route path="/public/notifications" element={<Notifications />} />
-              <Route path="/public/profile" element={<Profile />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/public/status" element={<Status />} />
+              <Route path="/ViewDocument" element={<ViewDocuments />} />
 
               {/* Dealer */}
               <Route path="/dealer/dashboard" element={<DealerDashboard />} />
@@ -124,6 +127,7 @@ function App() {
               <Route path="/resources" element={<Resources />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/home" element={<Home1 />} />
+              <Route path="/sidebar" element={<Sidebar />} />
             </Routes>
           </Suspense>
         </main>

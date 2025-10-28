@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DealerSidebar from '../../components/DealerSidebar';
+import Sidebar from '../../components/sidebar';
 
 const UploadDocuments = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const UploadDocuments = () => {
 
   return (
     <div className="flex">
-      <DealerSidebar />
+      <Sidebar />
       <div className="flex-1 p-6 bg-gray-50 min-h-screen">
         <h1 className="text-2xl font-bold mb-4 text-green-700">Upload Legal Documents</h1>
         <p className="text-gray-600 mb-6">Upload your registry, CLU, or any other legal documents for approval and verification.</p>

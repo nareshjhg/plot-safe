@@ -1,5 +1,5 @@
 import React from 'react';
-import DealerSidebar from '../../components/DealerSidebar';
+import Sidebar from '../../components/sidebar';
 
 const MyListings = () => {
   const listings = [
@@ -21,7 +21,7 @@ const MyListings = () => {
 
   return (
     <div className="flex">
-      <DealerSidebar />
+      <Sidebar />
       <div className="flex-1 p-6 bg-gray-50 min-h-screen">
         <h1 className="text-2xl font-bold mb-6 text-green-700">My Listings</h1>
 

@@ -1,7 +1,7 @@
 // pages/public/NewRequest.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PublicSidebar from "../../components/PublicSidebar";
+import Sidebar from "../../components/sidebar";
 
 const NewRequest = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const NewRequest = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <PublicSidebar />
+      <Sidebar />
 
       {/* Main content */}
       <div className="flex-1 p-8 bg-gray-50 min-h-screen">

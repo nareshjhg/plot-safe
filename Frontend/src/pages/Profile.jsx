@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PublicSidebar from "../../components/PublicSidebar";
+import Sidebar from "../components/sidebar";
 
 const Profile = () => {
   const [form, setForm] = useState({
@@ -19,7 +19,7 @@ const Profile = () => {
 
   return (
     <div className="flex">
-      <PublicSidebar />
+      <Sidebar />
       <div className="flex-1 p-8 bg-gray-50 min-h-screen">
         <h1 className="text-2xl font-bold text-blue-700 mb-4">⚙️ Profile & Settings</h1>
 

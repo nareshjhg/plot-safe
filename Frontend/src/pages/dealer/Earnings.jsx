@@ -1,6 +1,6 @@
 // pages/dealer/Earnings.jsx
 import React, { useState } from "react";
-import DealerSidebar from "../../components/DealerSidebar"; // adjust path if needed
+import Sidebar from "../../components/sidebar"; // adjust path if needed
 
 const Earnings = () => {
   const [earnings] = useState([
@@ -18,7 +18,7 @@ const Earnings = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <DealerSidebar />
+      <Sidebar />
 
       {/* Main Content */}
       <div className="flex-1 p-6 bg-gray-50 min-h-screen">
