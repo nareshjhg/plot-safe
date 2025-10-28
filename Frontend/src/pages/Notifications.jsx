@@ -1,10 +1,10 @@
 import React from "react";
-import PublicSidebar from "../../components/PublicSidebar";
+import Sidebar from "../components/sidebar";
 
 const Notifications = () => {
   return (
     <div className="flex">
-      <PublicSidebar />
+      <Sidebar />
       <div className="flex-1 p-8 bg-gray-50 min-h-screen">
         <h1 className="text-2xl font-bold text-blue-700 mb-4">🔔 Notifications</h1>
         <p className="text-gray-600 mb-6">Stay updated with the latest alerts and updates.</p>

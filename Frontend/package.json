@@ -1,6 +1,6 @@
 {
   "name": "plot-safe",
-  "homepage": "https://github.com/nareshjhg/plot-safe.git",
+  "homepage": "https://nareshjhg.github.io/plot-safe",
 
   "private": true,
   "version": "0.0.0",
@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
+  "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

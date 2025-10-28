@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DealerSidebar from '../../components/DealerSidebar';
+import Sidebar from '../../components/sidebar';
 
 // Mock data for fraud reports
 const mockReports = [
@@ -39,7 +39,7 @@ const FraudReportStatus = () => {
 
   return (
     <div className="flex">
-      <DealerSidebar />
+      <Sidebar />
       <div className="flex-1 p-6 bg-gray-50 min-h-screen">
         <h1 className="text-2xl font-bold mb-4 text-red-700">Fraud Report Status</h1>
         <p className="text-gray-600 mb-6">

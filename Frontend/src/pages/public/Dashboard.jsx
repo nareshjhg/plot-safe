@@ -1,7 +1,7 @@
 // pages/public/Dashboard.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import PublicSidebar from "../../components/PublicSidebar";
+import Sidebar from "../../components/sidebar";
 import {
   MapPin,
   FileSearch,
@@ -22,7 +22,7 @@ const features = [
     title: "View Colony Map",
     description: "See approved and illegal colonies on interactive map.",
     icon: <MapPin className="w-6 h-6 text-green-600" />,
-    link: "/public/map",
+    link: "/map",
     color: "green",
   },
   {
@@ -36,7 +36,7 @@ const features = [
     title: "View Documents",
     description: "Access CLU, Registry, DTCP, MCF or license documents.",
     icon: <FileText className="w-6 h-6 text-yellow-600" />,
-    link: "/public/documents",
+    link: "/ViewDocument",
     color: "yellow",
   },
   {
@@ -52,7 +52,7 @@ const PublicDashboard = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <PublicSidebar />
+      <Sidebar />
 
       {/* Main content */}
       <div className="flex-1 p-8 bg-gray-50 min-h-screen">

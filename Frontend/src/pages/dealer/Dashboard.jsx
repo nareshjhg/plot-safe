@@ -1,12 +1,12 @@
 // pages/dealer/Dashboard.jsx
 import React from "react";
-import DealerSidebar from "../../components/DealerSidebar";
+import Sidebar from "../../components/sidebar";
 import { Link } from "react-router-dom";
 
 const DealerDashboard = () => {
   return (
     <div className="flex">
-      <DealerSidebar />
+      <Sidebar />
 
       <div className="flex-1 p-8 bg-gray-100 min-h-screen">
         <h1 className="text-3xl font-bold text-green-700 mb-6">Welcome, Dealer</h1>
