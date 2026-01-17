@@ -1,89 +1,79 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import {
+  Home,
+  Users,
+  UserCheck,
+  UserCog,
+  FileText,
+  BarChart2,
+  IndianRupee,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
 const AdminSidebar = () => {
   const location = useLocation();
-  const [openMenus, setOpenMenus] = useState({});
-
-  const toggleMenu = (menu) => {
-    setOpenMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
-  };
 
   const menu = [
-    { name: "Dashboard", path: "/admin/dashboard" },
-    {
-      name: "Manage",
-      children: [
-        { name: "Dealers", path: "/admin/dealers" },
-        { name: "Colonies", path: "/admin/colonies-List" },
-        { name: "Blogs", path: "/admin/blogs" },
-        { name: "Docs", path: "/admin/docs" },
-      ],
-    },
-    {
-      name: "Colonies",
-      children: [
-        { name: "Add Colonies", path: "/admin/Add-colonies-form" },
-        { name: "Colonies List", path: "/admin/colonies-List" },
-        { name: "Colonies Map", path: "/admin/colonies" },
-      ],
-    },
-    { name: "Reports", path: "/admin/reports" },
+    { name: "Dashboard", path: "/admin/dashboard", icon: Home },
+    { name: "Manage Buyers", path: "/admin/buyers", icon: Users },
+    { name: "Manage Dealers", path: "/admin/dealers", icon: UserCheck },
+    { name: "Manage Verifiers", path: "/admin/verifiers", icon: UserCog },
+    { name: "Verification Requests", path: "/admin/requests", icon: FileText },
+    { name: "Reports Management", path: "/admin/reports", icon: FileText },
+    { name: "Payments / Revenue", path: "/admin/payments", icon: IndianRupee },
+    { name: "Analytics & Insights", path: "/admin/analytics", icon: BarChart2 },
+    { name: "System Settings", path: "/admin/settings", icon: Settings },
   ];
 
   return (
-    <aside className="w-64 min-h-screen bg-white border-r px-4 py-6">
-      <h2 className="text-xl font-bold text-blue-700 mb-6">Admin Panel</h2>
-      <nav className="space-y-2">
+    <aside className="w-64 min-h-screen bg-white border-r flex flex-col">
+      {/* ===== BRAND ===== */}
+      <div className="px-6 py-6 border-b">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold">
+            P
+          </div>
+          <div>
+            <h2 className="font-bold text-blue-700 leading-tight">
+              PropertyVerify
+            </h2>
+            <p className="text-xs text-gray-500">Admin Dashboard</p>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== MENU ===== */}
+      <nav className="flex-1 px-3 py-4 space-y-1">
         {menu.map((item) => {
-          if (item.children) {
-            const isOpen = openMenus[item.name];
-            return (
-              <div key={item.name}>
-                <button
-                  onClick={() => toggleMenu(item.name)}
-                  className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-50 text-gray-700"
-                >
-                  <span>{item.name}</span>
-                  {isOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
-                </button>
-                {isOpen && (
-                  <div className="ml-4 space-y-1">
-                    {item.children.map((sub) => (
-                      <Link
-                        key={sub.path}
-                        to={sub.path}
-                        className={`block px-4 py-1 rounded-md text-sm hover:bg-blue-100 ${
-                          location.pathname === sub.path
-                            ? "bg-blue-100 text-blue-800 font-semibold"
-                            : "text-gray-600"
-                        }`}
-                      >
-                        {sub.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          } else {
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`block px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-50 ${
-                  location.pathname === item.path
-                    ? "bg-blue-100 text-blue-800 font-semibold"
-                    : "text-gray-700"
-                }`}
-              >
-                {item.name}
-              </Link>
-            );
-          }
+          const isActive = location.pathname === item.path;
+          const Icon = item.icon;
+
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex items-center gap-3 px-4 py-2 rounded-lg text-sm transition ${
+                isActive
+                  ? "bg-blue-50 text-blue-600 font-semibold"
+                  : "text-gray-700 hover:bg-gray-100"
+              }`}
+            >
+              <Icon size={18} />
+              {item.name}
+            </Link>
+          );
         })}
       </nav>
+
+      {/* ===== LOGOUT ===== */}
+      <div className="px-4 py-4 border-t">
+        <button className="flex items-center gap-3 w-full px-4 py-2 text-sm rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600 transition">
+          <LogOut size={18} />
+          Logout
+        </button>
+      </div>
     </aside>
   );
 };

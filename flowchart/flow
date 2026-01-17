@@ -1,0 +1,56 @@
+START
+  |
+  v
+User / Dealer Login
+  |
+  v
+Submit Property Details
+(Address, Owner Name, Docs)
+  |
+  v
+Upload Documents
+(Sale Deed, Registry, Tax, EC)
+  |
+  v
+Auto System Check
+- Document completeness
+- Duplicate property check
+- OCR basic validation
+  |
+  v
+Is Auto Check OK?
+  |                 |
+  | NO              | YES
+  v                 v
+Request Fix /       Admin Review
+Reject              |
+                    v
+            Need Manual Verification?
+                    |
+            -----------------
+            |               |
+           NO              YES
+            |               |
+            v               v
+     Admin Approves     Assign Verifier
+            |               |
+            |        Verifier Checks
+            |        - Govt Records
+            |        - Site Visit (optional)
+            |               |
+            |        Upload Verification Report
+            |               |
+            -----------------
+                    |
+                    v
+              Admin Final Decision
+        (Approved / Rejected / Risky)
+                    |
+                    v
+        Verification Report Generated
+                    |
+                    v
+      Notify Buyer / Dealer (SMS / Email)
+                    |
+                    v
+              END

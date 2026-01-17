@@ -1,89 +1,95 @@
-// components/PublicSidebar.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import {
+  Home,
+  PlusCircle,
+  Building2,
+  FileText,
+  CreditCard,
+  Bell,
+  Settings,
+  LogOut,
+} from "lucide-react";
+
+const menu = [
+  {
+    name: "Dashboard",
+    icon: <Home size={18} />,
+    path: "/public/dashboard",
+  },
+  {
+    name: "New Verification Request",
+    icon: <PlusCircle size={18} />,
+    path: "/public/new-request",
+  },
+  {
+    name: "My Properties",
+    icon: <Building2 size={18} />,
+    path: "/public/properties",
+  },
+  {
+    name: "Reports",
+    icon: <FileText size={18} />,
+    path: "/public/reports",
+  },
+  {
+    name: "Payments & Invoices",
+    icon: <CreditCard size={18} />,
+    path: "/public/payments",
+  },
+  {
+    name: "Notifications",
+    icon: <Bell size={18} />,
+    path: "/public/notifications",
+  },
+  {
+    name: "Profile & Settings",
+    icon: <Settings size={18} />,
+    path: "/public/profile",
+  },
+];
 
 const PublicSidebar = () => {
   return (
-    <div className="w-64 h-screen bg-white shadow-md">
-      {/* Sidebar Title */}
-      <div className="p-4 text-lg font-bold text-blue-700 border-b">
-        Public Menu
+    <aside className="w-64 h-screen bg-white border-r flex flex-col">
+      {/* Logo */}
+      <div className="px-6 py-5 border-b">
+        <h1 className="text-lg font-bold text-blue-600">PropertyVerify</h1>
+        <p className="text-xs text-gray-500">Buyer Dashboard</p>
       </div>
 
-      {/* Menu Items */}
-      <ul className="p-4 space-y-3 text-sm">
-        <li>
-          <Link to="/public/dashboard" className="block text-gray-700 hover:text-blue-600">
-            📊 Dashboard
-          </Link>
-        </li>
-        <li>
-          <Link to="/check-property" className="block text-gray-700 hover:text-blue-600">
-            🔍 Search Colony/Property
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/status" className="block text-gray-700 hover:text-blue-600">
-            👁 Legality Status
-          </Link>
-        </li>
-        <li>
-          <Link to="/report-fraud" className="block text-gray-700 hover:text-blue-600">
-            🗣 Report Fraud
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/documents" className="block text-gray-700 hover:text-blue-600">
-            📄 View Source Docs
-          </Link>
-        </li>
-        <li>
-          <Link to="/approved-colonies" className="block text-gray-700 hover:text-blue-600">
-            📍 Approved/Illegal Map
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/feedback" className="block text-gray-700 hover:text-blue-600">
-            ✉️ Feedback / Suggestion
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/new-request" className="block text-gray-700 hover:text-blue-600">
-            📝 New Verification Request
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/properties" className="block text-gray-700 hover:text-blue-600">
-            🏠 My Properties
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/reports" className="block text-gray-700 hover:text-blue-600">
-            📑 Reports
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/payments" className="block text-gray-700 hover:text-blue-600">
-            💳 Payments & Invoices
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/notifications" className="block text-gray-700 hover:text-blue-600">
-            🔔 Notifications
-          </Link>
-        </li>
-        <li>
-          <Link to="/public/profile" className="block text-gray-700 hover:text-blue-600">
-            ⚙️ Profile & Settings
-          </Link>
-        </li>
-        <li>
-          <Link to="/logout" className="block text-gray-700 hover:text-red-600">
-            🚪 Logout
-          </Link>
-        </li>
-      </ul>
-    </div>
+      {/* Menu */}
+      <nav className="flex-1 px-3 py-4 space-y-1">
+        {menu.map((item, index) => (
+          <NavLink
+            key={index}
+            to={item.path}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition
+              ${
+                isActive
+                  ? "bg-blue-50 text-blue-600 font-medium"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`
+            }
+          >
+            {item.icon}
+            {item.name}
+          </NavLink>
+        ))}
+      </nav>
+
+      {/* Logout */}
+      <div className="p-4 border-t">
+        <NavLink
+          to="/logout"
+          className="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-red-50 hover:text-red-600 transition"
+        >
+          <LogOut size={18} />
+          Logout
+        </NavLink>
+      </div>
+    </aside>
   );
 };
 

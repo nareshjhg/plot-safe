@@ -1,61 +1,56 @@
-import React from "react";
+import {
+  Users,
+  FileText,
+  CheckCircle,
+  IndianRupee,
+} from "lucide-react";
+
 import AdminSidebar from "../../components/AdminSidebar";
+import StatCard from "../../components/Dashboard/StatCard";
+import Card from "../../components/Dashboard/Card";
+import RequestItem from "../../components/Dashboard/RequestItem";
+import VerifierCard from "../../components/Dashboard/VerifierCard";
+import ChartCard from "../../components/Dashboard/ChartCard";
 
 const AdminDashboard = () => {
   return (
-    <div className="flex">
+    <div className="flex bg-gray-50 min-h-screen">
       <AdminSidebar />
 
-      <div className="flex-1 p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-3xl font-bold text-blue-700 mb-6">Admin Dashboard</h1>
+      <div className="flex-1 p-8">
+        <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card title="Total Dealers" count={24} color="bg-blue-100" />
-          <Card title="Public Users" count={132} color="bg-green-100" />
-          <Card title="Approved Colonies" count={48} color="bg-yellow-100" />
-          <Card title="Pending Requests" count={7} color="bg-red-100" />
+        {/* Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <StatCard title="Total Users" value="1,234" icon={Users} color="bg-blue-100 text-blue-600" />
+          <StatCard title="Active Requests" value="45" icon={FileText} color="bg-yellow-100 text-yellow-600" />
+          <StatCard title="Completed Today" value="23" icon={CheckCircle} color="bg-green-100 text-green-600" />
+          <StatCard title="Revenue (Month)" value="₹3.2L" icon={IndianRupee} color="bg-purple-100 text-purple-600" />
         </div>
 
-        {/* Quick Actions */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-          <div className="flex flex-wrap gap-4">
-            <ActionButton title="Add Colony" />
-            <ActionButton title="Verify Dealer" />
-            <ActionButton title="Manage Users" />
-            <ActionButton title="View Complaints" />
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <Card title="Recent Requests">
+            <RequestItem
+              name="Flat 301"
+              buyer="Rajesh Kumar"
+              verifier="Unassigned"
+              status="pending"
+              actionLabel="Assign"
+            />
+          </Card>
+
+          <Card title="Verifier Performance">
+            <VerifierCard name="Suresh Iyer" id="VER-001" rating="4.8" completed={45} assigned={5} />
+          </Card>
         </div>
 
-        {/* Recent Activity */}
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-          <ul className="bg-white shadow rounded p-4 space-y-2 text-gray-700">
-            <li>✅ Dealer “Anil Estate” verified.</li>
-            <li>📌 Colony “Shiv Enclave” approved by admin.</li>
-            <li>📨 Complaint received from user “Rahul” in Faridabad.</li>
-            <li>🕓 Pending approval: “Green Valley Colony”.</li>
-          </ul>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+          <ChartCard title="Verification Trends" />
+          <ChartCard title="Revenue Analytics" />
         </div>
       </div>
     </div>
   );
 };
-
-// Reusable Components
-
-const Card = ({ title, count, color }) => (
-  <div className={`p-4 rounded shadow ${color}`}>
-    <h3 className="text-lg font-semibold">{title}</h3>
-    <p className="text-2xl font-bold">{count}</p>
-  </div>
-);
-
-const ActionButton = ({ title }) => (
-  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition">
-    {title}
-  </button>
-);
 
 export default AdminDashboard;

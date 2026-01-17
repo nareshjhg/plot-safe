@@ -1,0 +1,15 @@
+Dealer
+ |
+ |-- Login
+ |
+ |-- Add Client
+ |
+ |-- Add Multiple Properties
+ |
+ |-- Upload Docs (Bulk)
+ |
+ |-- Track All Verifications
+ |
+ |-- Download / Share Reports
+ |
+END

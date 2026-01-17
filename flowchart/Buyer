@@ -1,0 +1,16 @@
+Buyer
+ |
+ |-- Register / Login
+ |
+ |-- Submit Property for Verification
+ |
+ |-- Make Payment
+ |
+ |-- Track Status
+ |     - Pending
+ |     - In Progress
+ |     - Completed
+ |
+ |-- Download Report (PDF)
+ |
+END
