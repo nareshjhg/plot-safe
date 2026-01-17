@@ -1,0 +1,19 @@
+Admin
+ |
+ |-- Login
+ |
+ |-- View New Requests
+ |
+ |-- Check Auto-Validation Result
+ |
+ |-- Assign Verifier (if needed)
+ |
+ |-- Review Reports
+ |
+ |-- Approve / Reject / Flag Risk
+ |
+ |-- Generate Final Report
+ |
+ |-- Analytics & Revenue Tracking
+ |
+END

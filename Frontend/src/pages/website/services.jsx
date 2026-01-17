@@ -4,64 +4,96 @@ import { FaCheckCircle } from "react-icons/fa";
 const services = [
   {
     title: "Property Verification",
-    description:
-      "Comprehensive verification of ownership, title deed, encumbrance, and registry documents.",
     icon: "🏠",
+    points: [
+      "Ownership verification",
+      "Title deed authentication",
+      "Encumbrance certificate check",
+      "Property tax clearance",
+      "Municipal records verification",
+      "Previous ownership history",
+    ],
   },
   {
     title: "Legal Check",
-    description:
-      "Identify court cases, disputes, mortgages, and ensure compliance with legal regulations.",
     icon: "⚖️",
+    points: [
+      "Court case verification",
+      "Legal disputes check",
+      "Mortgage & loan verification",
+      "Builder approval verification",
+      "Land use compliance",
+      "NOC from authorities",
+    ],
   },
   {
-    title: "Valuation & Profitability Reports",
-    description:
-      "Get detailed property valuation, market trends, and profitability insights before investing.",
+    title: "Valuation & Profitability",
     icon: "📊",
+    points: [
+      "Current market valuation",
+      "Price trend analysis",
+      "Investment return projection",
+      "Rental yield estimation",
+      "Resale potential assessment",
+      "Locality development insights",
+    ],
   },
   {
     title: "Buyer Awareness Reports",
-    description:
-      "Educational guides and fraud alerts to help buyers avoid risks and make safe decisions.",
     icon: "📘",
+    points: [
+      "Property buying checklist",
+      "Legal documentation guide",
+      "Common fraud patterns",
+      "Buyer rights & responsibilities",
+      "Tax implications",
+      "Registration process guide",
+    ],
   },
 ];
 
 const pricingPlans = [
   {
     name: "Basic",
-    price: "₹1,999",
-    description: "Essential checks for quick buyers",
+    price: "₹999",
+    description: "Essential verification for small properties",
+    delivery: "48-hour delivery",
     features: [
-      "Registry / Sale Deed Check",
-      "Property Tax Receipts",
-      "Mutation / Khata record",
+      "Ownership verification",
+      "Basic title deed check",
+      "Encumbrance certificate",
+      "PDF report",
     ],
     highlight: false,
   },
   {
     name: "Standard",
-    price: "₹4,999",
-    description: "Most popular choice for buyers",
+    price: "₹2,499",
+    description: "Comprehensive verification for buyers",
+    delivery: "24-hour delivery",
     features: [
-      "All Basic Checks",
-      "Encumbrance Certificate",
-      "RERA / Authority Approval Check",
-      "Court Case Record Search",
+      "Everything in Basic",
+      "Legal dispute check",
+      "Court case verification",
+      "Market valuation",
+      "Detailed PDF + Excel report",
+      "Email support",
     ],
     highlight: true,
   },
   {
     name: "Premium",
-    price: "₹9,999+",
-    description: "Full legal verification",
+    price: "₹4,999",
+    description: "Complete due diligence package",
+    delivery: "Priority 12-hour delivery",
     features: [
-      "All Standard Checks",
-      "15–30 Year Title Search",
-      "Local Authority Approval",
-      "On-ground Verifier Inspection",
-      "Final Legal Opinion Report",
+      "Everything in Standard",
+      "Site visit & inspection",
+      "Builder verification",
+      "Investment analysis",
+      "30-min legal consultation",
+      "Phone & Email support",
+      "Unlimited revisions",
     ],
     highlight: false,
   },
@@ -70,6 +102,7 @@ const pricingPlans = [
 const Services = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
+
       {/* Services Section */}
       <h1 className="text-4xl font-bold mb-12 text-center text-blue-700">
         Our Services
@@ -79,19 +112,26 @@ const Services = () => {
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
+            className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
           >
-            <div className="text-5xl mb-4">{service.icon}</div>
-            <h2 className="text-xl font-semibold text-blue-600 mb-3">
+            <div className="text-5xl mb-4 text-center">{service.icon}</div>
+            <h2 className="text-xl font-semibold text-blue-600 mb-4 text-center">
               {service.title}
             </h2>
-            <p className="text-gray-700">{service.description}</p>
+            <ul className="space-y-2 text-sm text-gray-700">
+              {service.points.map((point, i) => (
+                <li key={i} className="flex gap-2 items-start">
+                  <FaCheckCircle className="text-blue-600 mt-1" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
 
       {/* Pricing Plans */}
-      <div className="mt-20">
+      <div className="mt-24">
         <h2 className="text-3xl font-bold text-center text-blue-700 mb-10">
           Pricing Plans
         </h2>
@@ -111,35 +151,20 @@ const Services = () => {
                   Most Popular
                 </span>
               )}
-              <h3
-                className={`text-2xl font-bold mb-2 ${
-                  plan.highlight ? "text-white" : "text-gray-800"
-                }`}
-              >
-                {plan.name}
-              </h3>
-              <p
-                className={`mb-4 ${
-                  plan.highlight ? "text-gray-100" : "text-gray-600"
-                }`}
-              >
-                {plan.description}
-              </p>
-              <p
-                className={`text-3xl font-bold mb-6 ${
-                  plan.highlight ? "text-yellow-200" : "text-blue-600"
-                }`}
-              >
-                {plan.price}
-              </p>
+
+              <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+              <p className="mb-3 opacity-90">{plan.description}</p>
+
+              <p className="text-3xl font-bold mb-1">{plan.price}</p>
+              <p className="text-sm mb-6 opacity-80">{plan.delivery}</p>
 
               <ul className="text-left mb-6 space-y-2">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-2">
                     <FaCheckCircle
-                      className={`${
-                        plan.highlight ? "text-yellow-200" : "text-blue-600"
-                      }`}
+                      className={
+                        plan.highlight ? "text-yellow-300" : "text-blue-600"
+                      }
                     />
                     <span>{feature}</span>
                   </li>
@@ -153,7 +178,7 @@ const Services = () => {
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
               >
-                {plan.highlight ? "Get Verified" : "Get Started"}
+                Get Started
               </button>
             </div>
           ))}
