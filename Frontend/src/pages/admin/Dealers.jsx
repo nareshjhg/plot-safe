@@ -1,30 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UserPlus } from "lucide-react";
 import AdminSidebar from "../../components/AdminSidebar";
 
 const AdminDealers = () => {
-  const [dealers, setDealers] = useState([
-    {
-      id: 1,
-      name: "Sharma Properties",
-      license: "RERA123456",
-      status: "Pending",
-      email: "sharma@example.com",
-      phone: "9876543210",
-      city: "Delhi",
-      address: "123, MG Road, Delhi",
-    },
-    {
-      id: 2,
-      name: "Kumar Real Estate",
-      license: "RERA654321",
-      status: "Approved",
-      email: "kumar@example.com",
-      phone: "9876501234",
-      city: "Mumbai",
-      address: "456, Marine Drive, Mumbai",
-    },
-  ]);
+  const [dealers, setDealers] = useState([]);
+
+useEffect(() => {
+  fetch("http://localhost:5000/api/dealers")
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data.dealers)) {
+        setDealers(data.dealers);
+      } else {
+        setDealers([]); // fail-safe
+      }
+    })
+    .catch(err => console.error(err));
+}, []);
+
+
 
   const [selectedDealer, setSelectedDealer] = useState(null);
   const [openViewModal, setOpenViewModal] = useState(false);
@@ -40,19 +34,29 @@ const AdminDealers = () => {
     address: "",
   });
 
-  const handleApprove = (id) => {
-    const updated = dealers.map((dealer) =>
-      dealer.id === id ? { ...dealer, status: "Approved" } : dealer
-    );
-    setDealers(updated);
-  };
+  const handleApprove = async (id) => {
+  const res = await fetch(`http://localhost:5000/api/dealers/${id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ status: "Approved" })
+  });
 
-  const handleReject = (id) => {
-    const updated = dealers.map((dealer) =>
-      dealer.id === id ? { ...dealer, status: "Rejected" } : dealer
-    );
-    setDealers(updated);
-  };
+  const updated = await res.json();
+  setDealers(prev => prev.map(d => d._id === id ? updated : d));
+};
+
+  const handleReject = async (id) => {
+  const res = await fetch(`http://localhost:5000/api/dealers/${id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ status: "Rejected" })
+  });
+
+  const updated = await res.json();
+  setDealers(prev => prev.map(d => d._id === id ? updated : d));
+};
+
+
 
   const openView = (dealer) => {
     setSelectedDealer(dealer);
@@ -92,11 +96,14 @@ const AdminDealers = () => {
     closeAll();
   };
 
-  const handleDelete = () => {
-    const updated = dealers.filter((dealer) => dealer.id !== selectedDealer.id);
-    setDealers(updated);
-    closeAll();
-  };
+  const handleDelete = async () => {
+  await fetch(`http://localhost:5000/api/dealers/${selectedDealer._id}`, {
+    method: "DELETE"
+  });
+
+  setDealers(prev => prev.filter(d => d._id !== selectedDealer._id));
+  closeAll();
+};
 
   return (
     <div className="flex bg-gray-50 min-h-screen">

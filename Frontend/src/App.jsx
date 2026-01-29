@@ -28,6 +28,8 @@ import ViewDocuments from "./pages/public/ViewDocuments";
 import ManageBuyers from "./pages/admin/ManageBuyers";
 import ManageVerifiers from "./components/verifier/ManageVerifiers";
 import VerificationRequests from "./pages/admin/VerificationRequests";
+import PropertyList from "./pages/dealer/PropertyList";
+import DealerReport from "./pages/dealer/DealerReport";
 
 // Lazy load pages
 const Home = lazy(() => import("./pages/Home"));
@@ -134,6 +136,8 @@ function App() {
             <Route path="/dealer/fraud-reports" element={<FraudReportStatus />} />
             <Route path="/dealer/clients" element={<MyClients />} />
             <Route path="/dealer/earnings" element={<Earnings />} />
+            <Route path="/dealer/propertylist" element={<PropertyList />} />
+            <Route path="/dealer/report" element={<DealerReport />} />
             <Route
               path="/dealer/properties"
               element={<ClientProperties />}
