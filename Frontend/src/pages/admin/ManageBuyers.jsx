@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import { UserPlus, X } from "lucide-react";
 import AdminSidebar from "../../components/AdminSidebar";
 
 const ManageBuyers = () => {
   const [selectedBuyer, setSelectedBuyer] = useState(null);
 
-  const buyers = [
-    {
-      id: "BUY-001",
-      name: "Rajesh Kumar",
-      email: "rajesh@example.com",
-      phone: "+91 9876543210",
-      requests: 3,
-      status: "Active",
-      joined: "12 Jan 2025",
-    },
-  ];
+  const [buyers, setBuyers] = useState([]);
 
+  useEffect(() => {
+    const fetchBuyers = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/buyers");
+        setBuyers(res.data);
+      } catch (error) {
+        console.log("Error fetching buyers:", error);
+      }
+    };
+
+    fetchBuyers();
+  }, []);
   return (
     <div className="flex bg-gray-50 min-h-screen">
       <AdminSidebar />
@@ -24,9 +28,7 @@ const ManageBuyers = () => {
       <div className="flex-1 p-8">
         {/* HEADER */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-xl font-semibold text-gray-800">
-            Manage Buyers
-          </h1>
+          <h1 className="text-xl font-semibold text-gray-800">Manage Buyers</h1>
 
           <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-900 transition">
             <UserPlus size={16} />
@@ -53,9 +55,7 @@ const ManageBuyers = () => {
                 <tr key={buyer.id} className="border-b last:border-none">
                   <td className="px-6 py-4 font-medium">{buyer.id}</td>
                   <td className="px-6 py-4">{buyer.name}</td>
-                  <td className="px-6 py-4 text-gray-600">
-                    {buyer.email}
-                  </td>
+                  <td className="px-6 py-4 text-gray-600">{buyer.email}</td>
                   <td className="px-6 py-4">{buyer.requests}</td>
                   <td className="px-6 py-4">
                     <span className="bg-black text-white px-3 py-1 rounded-full text-xs">
@@ -90,7 +90,6 @@ const ManageBuyers = () => {
 
 export default ManageBuyers;
 
-
 const BuyerModal = ({ buyer, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -104,16 +103,19 @@ const BuyerModal = ({ buyer, onClose }) => {
         </button>
 
         {/* Header */}
-        <h2 className="text-lg font-semibold mb-4">
-          Buyer Details
-        </h2>
+        <h2 className="text-lg font-semibold mb-4">Buyer Details</h2>
 
         {/* Content */}
         <div className="space-y-3 text-sm">
-          <Info label="User ID" value={buyer.id} />
+          <Info
+            label="User ID"
+            value={`USR-${buyer._id.substring(buyer._id.length - 5).toUpperCase()}`}
+          />
+
           <Info label="Name" value={buyer.name} />
           <Info label="Email" value={buyer.email} />
-          <Info label="Phone" value={buyer.phone} />
+          <Info label="Phone" value={buyer.mobile} />
+
           <Info label="Total Requests" value={buyer.requests} />
           <Info label="Joined On" value={buyer.joined} />
           <Info label="Status" value={buyer.status} />

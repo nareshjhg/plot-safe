@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/sidebar';
+import axios from "axios";
+
 
 const AddProperty = () => {
   const [form, setForm] = useState({
@@ -29,11 +31,38 @@ const AddProperty = () => {
     setFiles({ ...files, otherDocs: Array.from(e.target.files) });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: Submit form to backend
-    console.log("Form Submitted", form, files);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const token = localStorage.getItem("token");
+
+  const formData = new FormData();
+  formData.append("title", form.title);
+  formData.append("address", form.address);
+  formData.append("price", form.price);
+  formData.append("colonyName", form.colonyName);
+  formData.append("cluStatus", form.cluStatus);
+  formData.append("sourceLink", form.sourceLink);
+
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/dealer/properties/add",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,  // 🔥 Token required
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    console.log("Property added:", res.data);
+  } catch (err) {
+    console.log("Error:", err.response?.data);
+  }
+};
+
+
 
   return (
     <div className="flex">

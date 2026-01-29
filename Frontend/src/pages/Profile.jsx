@@ -1,67 +1,87 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 
 const Profile = () => {
   const [form, setForm] = useState({
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "+91 9876543210",
+    name: "",
+    email: "",
+    phone: "",
+    role: "",
   });
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    fetch("http://localhost:5000/api/auth/profile", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setForm(data));
+  }, []);
+
+  const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Profile updated ✅");
+    alert("Profile updated ✔ (display only)");
   };
 
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-2xl font-bold text-blue-700 mb-4">⚙️ Profile & Settings</h1>
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white shadow rounded-xl p-6 space-y-5 max-w-lg"
-        >
+      <div className="flex-1 p-8 bg-gray-50 min-h-screen">
+        <h1 className="text-2xl font-bold text-blue-700 mb-4">
+          ⚙️ Profile & Settings
+        </h1>
+
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow max-w-lg space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Full Name</label>
+            <label className="block">Full Name</label>
             <input
-              type="text"
               name="name"
-              value={form.name}
               onChange={handleChange}
-              className="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              value={form.name}
+              className="w-full border p-2 rounded"
             />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label>Email</label>
             <input
-              type="email"
               name="email"
               value={form.email}
-              onChange={handleChange}
-              className="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              disabled
+              className="w-full border p-2 rounded bg-gray-100"
             />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">Phone</label>
+            <label>Phone</label>
             <input
-              type="text"
               name="phone"
               value={form.phone}
               onChange={handleChange}
-              className="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="w-full border p-2 rounded"
             />
           </div>
 
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-          >
+          <div>
+            <label>Role</label>
+            <input
+              name="role"
+              value={form.role}
+              disabled
+              className="w-full border p-2 rounded bg-gray-100"
+            />
+          </div>
+
+          <button className="bg-blue-600 text-white px-4 py-2 rounded">
             Save Changes
           </button>
         </form>

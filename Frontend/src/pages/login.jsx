@@ -15,35 +15,35 @@ const Login = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (otpLogin) {
-      if (!form.email || !otp) {
-        setError("Enter your email/mobile and OTP.");
-        return;
-      }
-      console.log("Login with OTP:", form, otp);
-      redirectUser();
-    } else {
-      if (!form.email || !form.password) {
-        setError("Both email/mobile and password are required.");
-        return;
-      }
-      if (failedAttempts >= 3) {
-        setError("Account temporarily locked. Try again later.");
-        return;
-      }
-      // Simulate success/failure
-      console.log("Login with Password:", form);
-      redirectUser();
-    }
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const res = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: form.email, password: form.password }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    setError(data.message);
+    return;
+  }
+
+  // Save Token + User
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("user", JSON.stringify(data.user));
+
+  redirectUser(data.user.role);
+};
+
 
   const redirectUser = () => {
     if (form.role === "buyer") {
-      window.location.href = "/buyer-dashboard";
+      window.location.href = "/public/dashboard";
     } else if (form.role === "dealer") {
-      window.location.href = "/dealer-dashboard";
+      window.location.href = "/dealer/dashboard";
     } else {
       window.location.href = "/admin-panel";
     }
